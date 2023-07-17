@@ -1,0 +1,43 @@
+﻿@using WebApplication1.Models
+@using PagedList
+@using PagedList.Mvc
+
+@model IPagedList<Users>
+<head>
+    <link href="~/css/StyleSheet1.css" rel="stylesheet" />
+    <script src="~/js/code.jquery.com_jquery-3.6.0.min.js"></script>
+</head>
+<div>
+    <input type="text" />
+    <input type="button" value="Search" />
+    <br />
+    <br />
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>School Name</th>
+                <th>District</th>
+                <th>Lop</th>
+                <th>Role Name</th>
+            </tr>
+        </thead>
+        <tbody id="userListBody">
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.FullName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Phone</td>
+                    <td>@user.SchoolName</td>
+                    <td>@user.District</td>
+                    <td>@user.Lop</td>
+                    <td>@user.RoleName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+</div>
